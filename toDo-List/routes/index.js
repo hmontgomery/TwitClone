@@ -81,7 +81,6 @@ router.put('/posts/:post/upvote', auth, function(req, res, next) {
   });
 });
 
-
 // create a new comment
 router.post('/posts/:post/comments', auth, function(req, res, next) {
   var comment = new Comment(req.body);

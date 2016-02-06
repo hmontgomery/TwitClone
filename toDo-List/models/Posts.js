@@ -14,4 +14,5 @@ PostSchema.methods.upvote = function(cb) {
   this.save(cb);
 };
 
+
 mongoose.model('Post', PostSchema);

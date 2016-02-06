@@ -83,6 +83,14 @@ function($stateProvider, $urlRouterProvider) {
     });
   };
 
+   o.downvote = function(post) {
+    return $http.put('/posts/' + post._id + '/upvote', {
+      headers: {Authorization: 'Bearer '+auth.getToken()}
+    }).success(function(data){
+      post.upvotes -= 1;
+    });
+  };
+
   o.addComment = function(id, comment) {
     return $http.post('/posts/' + id + '/comments', comment, {
       headers: {Authorization: 'Bearer '+auth.getToken()}
@@ -94,6 +102,14 @@ function($stateProvider, $urlRouterProvider) {
       headers: {Authorization: 'Bearer '+auth.getToken()}
     }).success(function(data){
       comment.upvotes += 1;
+    });
+  };
+  
+  o.downvoteComment = function(post, comment) {
+    return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/upvote', {
+      headers: {Authorization: 'Bearer '+auth.getToken()}
+    }).success(function(data){
+      comment.upvotes -= 1;
     });
   };
 
@@ -163,9 +179,14 @@ function($scope, posts, auth){
     $scope.link = '';
   };
 
+  /*
   $scope.incrementUpvotes = function(post) {
     posts.upvote(post);
   };
+  $scope.decrementUpvotes = function(post) {
+    posts.downVote(post);
+  };
+  */
 
 }])
 .controller('PostsCtrl', [
@@ -188,9 +209,16 @@ function($scope, posts, post, auth){
     $scope.body = '';
   };
 
+  /*
   $scope.incrementUpvotes = function(comment){
     posts.upvoteComment(post, comment);
   };
+  
+  $scope.decrementUpvotes = function(comment){
+    posts.upvoteComment(post, comment);
+  };
+  */
+
 }])
 .controller('AuthCtrl', [
 '$scope',
