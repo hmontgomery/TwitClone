@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-mongoose.createConnection('mongodb://localhost/news');
+mongoose.createConnection('mongodb://localhost/newz');
 
 require('./models/Posts');
 require('./models/Comments');
